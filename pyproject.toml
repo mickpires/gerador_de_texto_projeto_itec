@@ -8,5 +8,9 @@ dependencies = [
     "crewai>=1.2.0",
     "crewai-tools>=1.2.0",
     "flask>=3.1.2",
+    "flask-bcrypt>=1.0.1",
+    "flask-login>=0.6.3",
+    "flask-sqlalchemy>=3.1.1",
+    "flask-wtf>=1.2.2",
     "langchain-community>=0.4.1",
 ]
