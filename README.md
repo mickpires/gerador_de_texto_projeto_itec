@@ -46,6 +46,8 @@ Após feita a _key_ e inserida no espaço demarcado, o usuário pode escrever so
 
 ## Detalhes técnicos
 
-O _LLM_ utilizado para os agentes é o _gemini 2.5 flash_ porque, segundo o site do _Google AI_ sobre o _Gemini_, ele é o modelo apropriado para o uso em agentes e também apresenta uma boa quantidade de requisições disponíveis por dia, 250 requisições por dia.
+O _LLM_ utilizado para os agentes é o _gemini 2.5 flash_ porque, segundo o site do _Google AI_ sobre o _Gemini_, ele é o modelo apropriado para o uso em agentes e também apresenta uma boa quantidade de requisições disponíveis por dia, 250 requisições por dia na versão gratuíta.
 
-A implementação dos agentes está em [`crew.py`](itec/crew.py).
+A implementação dos agentes está em [`crew.py`](itec/crew.py). Lá tem somente uma função chamada `gerar_texto(prompt, key)` que recebe o _prompt_ do usuário e a sua _key_ do _gemini API_ e retorna o título e o conteúdo do texto gerado pelos agentes. Abaixo está um fluxograma do processo
+
+![alt text](fluxograma.png)
