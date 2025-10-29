@@ -1,10 +1,8 @@
 from crewai import Agent, Task, Crew, LLM
-from langchain_openai import ChatOpenAI
 #from itec import OPENROUTER_API_KEY
 from itec import GOOGLE_API_KEY
 from itec.tool import WikipediaSearchTool
-from itec.pydantic import  ReaderResults, ResearcherResults, WriterResults
-from langchain_google_genai import ChatGoogleGenerativeAI
+from itec.pydantic import  ReaderResults, WriterResults
 
 # llm = ChatOpenAI(
 #     model = 'gemini-2.0-flash-live',

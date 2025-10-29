@@ -3,7 +3,6 @@ from pydantic import BaseModel, Field
 from typing import Type
 import requests
 
-# Para ajudar em testar se a ferramenta está correta. obtei por deixar separado assim
 def wikipedia_search(topic):
     API_URL = "https://en.wikipedia.org/w/api.php"
     params = {
@@ -37,7 +36,6 @@ def wikipedia_search(topic):
         if 'extract' not in primeira_pagina or not primeira_pagina['extract']:
             raise ValueError(f"Página encontrada mas sem conteúdo extraível para: '{topic}'")
         
-        #title = primeira_pagina['title']
         content = primeira_pagina['extract']
         
         return content
