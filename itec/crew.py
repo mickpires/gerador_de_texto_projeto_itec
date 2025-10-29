@@ -1,22 +1,33 @@
-from crewai import Agent, Task, Crew
+from crewai import Agent, Task, Crew, LLM
 from langchain_openai import ChatOpenAI
-from itec import OPENROUTER_API_KEY
+#from itec import OPENROUTER_API_KEY
+from itec import GOOGLE_API_KEY
 from itec.tool import WikipediaSearchTool
 from itec.pydantic import  ReaderResults, ResearcherResults, WriterResults
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-llm = ChatOpenAI(
-    model = 'openrouter/deepseek/deepseek-chat-v3.1:free',
-    base_url = 'https://openrouter.ai/api/v1',
-    openai_api_key = OPENROUTER_API_KEY
+# llm = ChatOpenAI(
+#     model = 'gemini-2.0-flash-live',
+#     #base_url = 'https://openrouter.ai/api/v1',
+#     base_url = 'https://generativelanguage.googleapis.com/v1beta/openai/',
+#     openai_api_key = GOOGLE_API_KEY
+#     #openai_api_key = OPENROUTER_API_KEY
+# )
+
+llm = LLM(
+    model="gemini/gemini-2.5-flash",
+    api_key=GOOGLE_API_KEY,
+    temperature=0.7
 )
 
 wikipedia_search_tool = WikipediaSearchTool()
 
 reader = Agent(
-    role = "Reader",
-    goal = "Understand what are the topics the user is requesting to be searched on wikipedia and what language the user wants the result",
-    backstory = 'you are an expert on analyze text' 
-                'you understand what are the key topics the users wants to know about',
+    role = "Wikipedia Topic Extractor",
+    goal = "Extract specific Wikipedia article titles from user requests that can be directly searched in Wikipedia API",
+    backstory = '''You are an expert at analyzing user requests and identifying the exact Wikipedia article titles 
+    that would provide the most relevant information. You understand that Wikipedia articles have specific titles 
+    and you extract only main concept titles, not descriptive phrases.''',
     allow_delegation=False,
     llm = llm
 )
@@ -32,6 +43,7 @@ researcher = Agent(
     llm = llm
 )
 
+
 writer = Agent(
     role = 'senior writer',
     goal = 'write an article with a title and a content which has more than 200 words and less than 2000 words',
@@ -42,17 +54,23 @@ writer = Agent(
 )
 
 reader_task = Task(
-    name = 'reader_task',
+    name = 'wikipedia_topic_extraction',
     description="""
     Analyze the user prompt: {prompt}
-    Identify and extract the main topics that need to be researched on Wikipedia.
-    Return ONLY a JSON object with a single key "topics" containing an array of topic strings.
+    
+    CRITICAL INSTRUCTIONS:
+    - Extract ONLY main Wikipedia article titles, not descriptive phrases
+    - Return concise article titles like "Physics", "Classical mechanics", "Quantum physics"
+    - DO NOT return phrases like "Physics definition and scope" or "History of Physics concepts"
+    - Each topic should be a direct Wikipedia article title
+    - Focus on core concepts mentioned in the prompt
+    
+    Return ONLY a JSON object with a single key "topics" containing an array of Wikipedia article title strings.
     """,
-    expected_output="A JSON object with key 'topics' containing array of research topics",
+    expected_output="A JSON object with key 'topics' containing array of direct Wikipedia article titles",
     output_pydantic=ReaderResults,
     agent=reader
 )
-reader_task.output
 
 researcher_task = Task(
     name="researcher_task",
@@ -63,7 +81,7 @@ researcher_task = Task(
     """,
     expected_output = """
     the expected output is a python list with each text extracted as follow:
-    texts = [the text from topic 1, the text from topic 2, ..., the text from topic n]
+    contents = [the text from topic 1, the text from topic 2, ..., the text from topic n]
 """,
     output_pydantic = ResearcherResults,
     tools = [wikipedia_search_tool],
