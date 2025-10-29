@@ -4,6 +4,7 @@
 
 - [Instalação](#instalação)
 - [Exemplo de Uso](#exemplo-de-uso)
+- [Detalhes Técnicos](#detalhes-técnicos)
 
 
 ## Instalação
@@ -36,9 +37,15 @@ e será apresentado a API
 
 ![alt text](imagens_readme/image.png)
 
-## Exemplo de uso
+## Exemplo de Uso
 
 Para a API funcionar é necessário que o usuário forneça uma _key_ do Gemini API que pode ser facilmente criada. A seguir um link do site do google ensinando como que faz para criar uma _key_. Não é necessário inserir nenhum cartão de crédito para criar https://ai.google.dev/gemini-api/docs/quickstart?hl=pt-br.
 Após feita a _key_ e inserida no espaço demarcado, o usuário pode escrever sobre o que o artigo deve ser. Abaixo está uma execução e de como que deve ser esperado o resultado. O artigo tem um titulo e o conteúdo.
 
 ![alt text](imagens_readme/resultado.png)
+
+## Detalhes técnicos
+
+O _LLM_ utilizado para os agentes é o _gemini 2.5 flash_ porque, segundo o site do _Google AI_ sobre o _Gemini_, ele é o modelo apropriado para o uso em agentes e também apresenta uma boa quantidade de requisições disponíveis por dia, 250 requisições por dia.
+
+A implementação dos agentes está em `[crew](itec/crew.py)`.
