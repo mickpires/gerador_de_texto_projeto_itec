@@ -1,11 +1,11 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'afb106f085decea3730314f4b5c92d6c'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
 
 from itec import routes

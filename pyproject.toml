@@ -7,10 +7,15 @@ requires-python = ">=3.13"
 dependencies = [
     "crewai>=1.2.0",
     "crewai-tools>=1.2.0",
+    "dotenv>=0.9.9",
     "flask>=3.1.2",
     "flask-bcrypt>=1.0.1",
     "flask-login>=0.6.3",
     "flask-sqlalchemy>=3.1.1",
     "flask-wtf>=1.2.2",
     "langchain-community>=0.4.1",
+    "langchain-openai>=1.0.1",
+    "litellm>=1.79.0",
+    "pydantic>=2.12.3",
+    "wikipedia>=1.4.0",
 ]
