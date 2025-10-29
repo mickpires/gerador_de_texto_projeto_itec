@@ -13,9 +13,12 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
+
         <div class="form-group">
-            <p>Insira o prompt abaixo</p>
             <form method="POST">
+                <p>Insira a sua key do Gemini API</p>
+                {{form.token}}
+                <p>Insira o prompt abaixo</p>
                 {{ form.hidden_tag() }}
                 {{form.prompt}}
 
