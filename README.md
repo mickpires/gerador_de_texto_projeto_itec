@@ -21,4 +21,11 @@ Após ter feito a instalação do `uv`, é somente necessário entrar no diretó
 uv run run.py
 ```
 
-Ele irá baixar as dependências no arquivo `pyproject.toml` e executar o código.
+Ele irá baixar as dependências contidas no arquivo `pyproject.toml` e executar o código. É necessário então colocar na sua barra de navegação do navegador
+
+```bash
+localhost:5000
+```
+
+e será apresentado a API
+![alt text](imagens_readme/image.png)
