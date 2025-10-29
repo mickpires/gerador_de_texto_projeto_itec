@@ -103,5 +103,5 @@ writer_task = Task(
 article_creater_crew = Crew(
     agents = [reader, researcher, writer],
     tasks = [reader_task, researcher_task, writer_task],
-    verbose=True
+    verbose=False
 )
