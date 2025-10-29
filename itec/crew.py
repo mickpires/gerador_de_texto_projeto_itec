@@ -1,16 +1,6 @@
 from crewai import Agent, Task, Crew, LLM
-#from itec import OPENROUTER_API_KEY
-from itec import GOOGLE_API_KEY
 from itec.tool import WikipediaSearchTool
 from itec.pydantic import  ReaderResults, WriterResults
-
-# llm = ChatOpenAI(
-#     model = 'gemini-2.0-flash-live',
-#     #base_url = 'https://openrouter.ai/api/v1',
-#     base_url = 'https://generativelanguage.googleapis.com/v1beta/openai/',
-#     openai_api_key = GOOGLE_API_KEY
-#     #openai_api_key = OPENROUTER_API_KEY
-# )
 
 def gerar_texto(prompt, key):
 
