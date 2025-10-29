@@ -48,4 +48,4 @@ Após feita a _key_ e inserida no espaço demarcado, o usuário pode escrever so
 
 O _LLM_ utilizado para os agentes é o _gemini 2.5 flash_ porque, segundo o site do _Google AI_ sobre o _Gemini_, ele é o modelo apropriado para o uso em agentes e também apresenta uma boa quantidade de requisições disponíveis por dia, 250 requisições por dia.
 
-A implementação dos agentes está em `[crew](itec/crew.py)`.
+A implementação dos agentes está em [`crew.py`](itec/crew.py).
