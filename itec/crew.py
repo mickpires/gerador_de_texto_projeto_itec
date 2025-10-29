@@ -64,10 +64,14 @@ reader_task = Task(
     - DO NOT return phrases like "Physics definition and scope" or "History of Physics concepts"
     - Each topic should be a direct Wikipedia article title
     - Focus on core concepts mentioned in the prompt
+    - Identify the language that the user wants the final text by the prompt
+    - guarantee that the topics are in english even though the prompt may be written in another language
+    to be able to use to search on wikipedia
     
-    Return ONLY a JSON object with a single key "topics" containing an array of Wikipedia article title strings.
+    Return ONLY a JSON object with a single key "topics" containing an array of Wikipedia article title strings
+    and the language that the user wants the final text.
     """,
-    expected_output="A JSON object with key 'topics' containing array of direct Wikipedia article titles",
+    expected_output="A JSON object with key 'topics' containing array of direct Wikipedia article titles and the language",
     output_pydantic=ReaderResults,
     agent=reader
 )
@@ -83,7 +87,6 @@ researcher_task = Task(
     the expected output is a python list with each text extracted as follow:
     contents = [the text from topic 1, the text from topic 2, ..., the text from topic n]
 """,
-    output_pydantic = ResearcherResults,
     tools = [wikipedia_search_tool],
     agent = researcher
 )
@@ -92,7 +95,7 @@ writer_task = Task(
     name = 'writer_task',
     description = 'Get all the texts found on the wikipedia by the researcher  in the researcher_task and use it to produce the article',
     expected_output= 'The article should have a title and a content with more than 200 words and less than 2000'
-                      'The article must be wrote in {output_language}',
+                      'The article must be wrote in the language identified on wikipedia_topic_extractor',
     output_pydantic= WriterResults,
     agent = writer
 )
