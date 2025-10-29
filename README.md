@@ -50,4 +50,4 @@ O _LLM_ utilizado para os agentes é o _gemini 2.5 flash_ porque, segundo o site
 
 A implementação dos agentes está em [`crew.py`](itec/crew.py). Lá tem somente uma função chamada `gerar_texto(prompt, key)` que recebe o _prompt_ do usuário e a sua _key_ do _gemini API_ e retorna o título e o conteúdo do texto gerado pelos agentes. Abaixo está um fluxograma do processo
 
-![alt text](fluxograma.png)
+![alt text](imagens_readme/fluxograma.png)
