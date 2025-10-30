@@ -3,6 +3,54 @@ from itec.tool import WikipediaSearchTool
 from itec.pydantic import  ReaderResults, WriterResults
 
 def gerar_texto(prompt, key):
+    """
+    Gera um artigo completo pesquisando e processando informações da Wikipedia.
+    
+    Esta função utiliza um sistema multiagente para:
+    1. Identificar tópicos relevantes no prompt do usuário
+    2. Pesquisar artigos correspondentes na Wikipedia
+    3. Gerar um artigo original baseado no conteúdo pesquisado
+    
+    Args:
+        prompt (str): O tópico ou solicitação do usuário para o artigo desejado.
+                     Pode ser em qualquer idioma, mas os tópicos serão identificados
+                     em inglês para pesquisa.
+        key (str): Chave da API para o serviço de modelo de linguagem (LLM).
+    
+    Returns:
+        tuple: Uma tupla contendo:
+            - title (str): Título do artigo gerado
+            - content (str): Conteúdo do artigo (entre 200-2000 palavras)
+    
+    Processo:
+        1. Extração de Tópicos (Reader Agent):
+           - Analisa o prompt e identifica títulos específicos de artigos da Wikipedia
+           - Determina o idioma desejado para o artigo final
+           - Retorna tópicos em inglês para pesquisa
+        
+        2. Pesquisa (Researcher Agent):
+           - Busca cada tópico individualmente na Wikipedia
+           - Coleta o conteúdo textual dos artigos encontrados
+        
+        3. Escrita (Writer Agent):
+           - Sintetiza o conteúdo pesquisado em um artigo coeso
+           - Gera texto no idioma original do prompt
+           - Produz conteúdo entre 300-2000 palavras com título
+    
+    Exemplo:
+        >>> titulo, conteudo = gerar_texto(
+        ...     "Explique os conceitos básicos da física quântica",
+        ...     "sua_chave_api"
+        ... )
+        >>> print(f"Título: {titulo}")
+        >>> print(f"Conteúdo: {conteudo}")
+    
+    Notas:
+        - Usa o modelo Gemini 2.5 Flash como LLM base
+        - Temperatura configurada em 0.7 para equilíbrio entre criatividade e precisão
+        - Requer conexão com internet para acesso à Wikipedia
+        - O conteúdo gerado é baseado em fontes da Wikipedia mas reescrito originalmente
+    """
 
     llm = LLM(
         model="gemini/gemini-2.5-flash",
