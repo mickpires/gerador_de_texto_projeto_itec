@@ -53,7 +53,7 @@ Após feita a _key_ e inserida no espaço demarcado, o usuário pode escrever so
 
 Nas primeiras implementações, o modelo utilizado era o _DeepSeek V3.1_ --- A versão gratuita ---, fornecido pela _OpenRouter_, porém houve vários problemas em utilizar este modelo. Dois deles foram: 
 - O agente responsável de utilizar a tarefa de extrair --- o pesquisador ---, fazia a tarefa --- extraia o texto ---, mas não entendia que tinha que passar o texto extraído para o agente escritor. Então, ele gerava qualquer resposta e passava para o escritor. O escritor por sua vez, não conseguia atender ao que foi requerido pelo usuário e o processo era abortado; 
-- Outro problema era que por conta de ser pelo _OpenRouter_, o limite de execução da API deles por dia é de somente 50 por dia. O que limitou muito a capacidade de testar a implementação porque a parte importante é entender se os agentes estão entendendo o que está sendo pedido para eles.
+- Outro problema era que, por conta de ser pelo _OpenRouter_, o limite de execução da API deles por dia é de somente 50 por dia. O que limitou muito a capacidade de testar a implementação porque a parte importante é entender se os agentes estão entendendo o que está sendo pedido para eles.
 
 O _LLM_ final utilizado para os agentes foi o _gemini 2.5 flash_ porque, segundo o site do _Google AI_ sobre o _Gemini_, ele é o modelo apropriado para o uso em agentes e também apresenta uma boa quantidade de requisições disponíveis por dia, 250 requisições por dia na versão gratuíta. Ele apresentou um resultado melhor do que o _DeepSeek V3.1_ para este tipo de tarefa.
 
@@ -63,5 +63,6 @@ A implementação dos agentes está em [`crew.py`](itec/crew.py). Lá tem soment
 
 ![alt text](imagens_readme/fluxograma.png)
 
-Eu configurei com que a task do leitor e do escritor retornassem com os campos que estão definidos em [`pydantic.py`](itec/pydantic.py). Então, o leitor retorna uma lista com os tópicos detectados e _string_ indicando qual é o idioma que o escritor deve escrever o texto.
-Como explicado pela figura, o pesquisador irá pegar estes tópicos e executar a ferramenta de buscar na wikipedia como implementada em [`tool.py`](itec/tool.py). Ela verifica se há uma página para o tópico identificado pelo leitor e se tem retorna o conteúdo dela. Ele vai fazer isto para todos os tópicos e depois vai colocar em uma lista e passar para o escritor. O escritor por fim, vai ter acesso a este texto extraído pelo pesquisador mais a linguagem detectada pelo leitor e vai escrever o texto.
+
+A saida das _tasks_ do leitor e do escritor foram configuradas de uma forma que retornassem com os campos que estão definidos em [`pydantic.py`](itec/pydantic.py). Então, o leitor retorna uma lista com os tópicos detectados e _string_ indicando qual é o idioma que o escritor deve escrever o texto.
+Como explicado pela figura, o pesquisador irá pegar estes tópicos e executar a ferramenta de buscar na _Wikipedia_ como implementada em [`tool.py`](itec/tool.py). Ela verifica se há uma página para o tópico identificado pelo leitor e se tem retorna o conteúdo dela. Ele vai fazer isto para todos os tópicos e depois vai colocar em uma lista e passar para o escritor. O escritor por fim, vai ter acesso a este texto extraído pelo pesquisador mais a linguagem detectada pelo leitor e vai escrever o texto, retornando o título e o conteúdo como especificado em [`tool.py`](itec/tool.py).
