@@ -35,7 +35,8 @@ localhost:5000
 
 e será apresentado a API
 
-![alt text](imagens_readme/image.png)
+![Descrição](https://raw.githubusercontent.com/mickpires/gerador_de_texto_projeto_itec/master/imagens_readme/image.png)
+
 
 ## Exemplo de Uso
 
