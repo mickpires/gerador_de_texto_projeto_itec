@@ -72,4 +72,4 @@ Como explicado pela figura, o pesquisador irá pegar estes tópicos e executar a
 ### A API
 
 A API foi implementada utilizando _Flask_ por conta de sua facilidade na implementação de pequenos projetos. A API é somente em uma página simples em que o usuário deve fornecer um _prompt_ e uma _key_ para que ela execute o código. Foi optado esta escolha do usuário fornecer a _key_ por medidas de segurança --- não vazar a _key_ do autor.
-A implementação pode ser vista em ['routes.py'](itec/'routes.py'). Quando o usuário aperta em executar o prompt e a key é passada para `gerar_texto` e no final retorna o título e o conteúdo do texto.
+A implementação pode ser vista em [`routes.py`](itec/routes.py). Quando o usuário aperta em executar o prompt e a key é passada para `gerar_texto` e no final retorna o título e o conteúdo do texto.
