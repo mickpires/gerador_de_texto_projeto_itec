@@ -1,4 +1,4 @@
-# Gerador de texto para o teste prático para a vaga de programador IA teste prático
+# Gerador de texto para o teste prático para a vaga de programador IA
 
 ## Sumário
 
